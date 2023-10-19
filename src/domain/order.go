@@ -21,8 +21,8 @@ func (o *Order) Items() []ItemOrder {
 	return o.items
 }
 
-func (o *Order) Pay() {
-	o.calculateTotal()
+func (o *Order) Pay(method MethodPay) {
+	method.Pay(o.calculateTotal())
 }
 
 func (o *Order) calculateTotal() int {
