@@ -6,9 +6,8 @@ type Item struct {
 	amount int
 }
 
-func NewItem(id int64, name string, amount int) *Item {
+func NewItem(name string, amount int) *Item {
 	return &Item{
-		id:     id,
 		name:   name,
 		amount: amount,
 	}
@@ -36,4 +35,8 @@ func (i *Item) Name() string {
 
 func (i *Item) Amount() int {
 	return i.amount
+}
+
+func (i *Item) Exists() bool {
+	return i.id > 0
 }
