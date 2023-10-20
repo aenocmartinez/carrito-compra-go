@@ -2,11 +2,17 @@ package main
 
 import (
 	"ejemplo2/src/view/controller"
+	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+
+	if err := godotenv.Load(); err != nil {
+		log.Fatalf("Error al cargar el archivo .env: %v", err)
+	}
 
 	server := gin.New()
 

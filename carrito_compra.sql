@@ -9,5 +9,6 @@ create table items(
 	id bigint auto_increment,
 	name varchar(60) not null,
 	amount int default 0,
+	unique(name),
 	primary key(id)
 );

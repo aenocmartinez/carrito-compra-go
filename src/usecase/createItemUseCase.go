@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"ejemplo2/src/dao/mock"
+	"ejemplo2/src/dao/mysql"
 	"ejemplo2/src/domain"
 	"ejemplo2/src/view/dto"
 )
@@ -10,12 +10,13 @@ type CreateItemUseCase struct{}
 
 func (uc *CreateItemUseCase) Execute(itemDto dto.ItemDto) (response dto.ResponseDto) {
 
-	var itemRepository domain.ItemRepository = mock.NewItemDao()
+	var itemRepository domain.ItemRepository = mysql.NewItemDao()
 
 	item := itemRepository.FindItemByName(itemDto.Name)
 	if item.Exists() {
 		response.Code = "202"
 		response.Data = "Ha ocurrido un error en el sistema"
+		return response
 	}
 
 	item.SetRepository(itemRepository)
