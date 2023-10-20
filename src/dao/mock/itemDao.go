@@ -4,6 +4,7 @@ import (
 	"ejemplo2/src/domain"
 	"errors"
 	"strconv"
+	"strings"
 )
 
 type ItemDao struct {
@@ -20,7 +21,7 @@ func (i *ItemDao) CreateItem(item domain.Item) error {
 	nextId := len(i.items) + 1
 	item.SetId(int64(nextId))
 	i.items = append(i.items, item)
-	return nil 
+	return nil
 }
 
 func (i *ItemDao) DeleteItem(item domain.Item) error {
@@ -67,4 +68,11 @@ func load() (items []domain.Item) {
 	return items
 }
 
-
+func (i *ItemDao) FindItemByName(name string) domain.Item {
+	for _, item := range i.items {
+		if strings.EqualFold(item.Name(), name) {
+			return item
+		}
+	}
+	return domain.Item{}
+}

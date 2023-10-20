@@ -1,9 +1,10 @@
 package domain
 
 type Item struct {
-	id     int64
-	name   string
-	amount int
+	id             int64
+	name           string
+	amount         int
+	itemRepository ItemRepository
 }
 
 func NewItem(name string, amount int) *Item {
@@ -11,6 +12,10 @@ func NewItem(name string, amount int) *Item {
 		name:   name,
 		amount: amount,
 	}
+}
+
+func (i *Item) SetRepository(itemRepository ItemRepository) {
+	i.itemRepository = itemRepository
 }
 
 func (i *Item) SetId(id int64) {
@@ -39,4 +44,8 @@ func (i *Item) Amount() int {
 
 func (i *Item) Exists() bool {
 	return i.id > 0
+}
+
+func (i *Item) Create() error {
+	return i.itemRepository.CreateItem(*i)
 }

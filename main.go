@@ -1,6 +1,18 @@
 package main
 
+import (
+	"ejemplo2/src/view/controller"
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
+
+	server := gin.New()
+
+	server.POST("items", controller.CreateItem)
+
+	server.Run(":8182")
 
 	// item1 := *domain.NewItem(1, "Item 1", 100)
 	// item2 := *domain.NewItem(2, "Item 2", 200)
