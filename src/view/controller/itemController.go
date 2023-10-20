@@ -29,3 +29,27 @@ func CreateItem(c *gin.Context) {
 	code, _ := strconv.Atoi(response.Code)
 	c.JSON(code, response.Data)
 }
+
+func FindItemById(c *gin.Context) {
+
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	useCase := usecase.FindItemByIdUseCase{}
+	response := useCase.Execute(id)
+
+	code, _ := strconv.Atoi(response.Code)
+	c.JSON(code, response.Data)
+}
+
+func ItemList(c *gin.Context) {
+
+	useCase := usecase.ItemListUseCase{}
+	response := useCase.Execute()
+
+	c.JSON(http.StatusOK, response)
+}

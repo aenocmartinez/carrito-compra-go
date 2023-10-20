@@ -28,5 +28,5 @@ func TestCreateItemUseCase(t *testing.T) {
 	item.Create()
 
 	itemFound := itemRepository.FindItemById(5)
-	assert.Equal(t, itemFound.Id(), expectedId)
+	assert.Equal(t, itemFound.Id, expectedId)
 }

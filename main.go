@@ -11,6 +11,8 @@ func main() {
 	server := gin.New()
 
 	server.POST("items", controller.CreateItem)
+	server.GET("items", controller.ItemList)
+	server.GET("items/:id", controller.FindItemById)
 
 	server.Run(":8182")
 
